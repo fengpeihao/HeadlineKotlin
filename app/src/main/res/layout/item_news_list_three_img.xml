@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_news_list_item_status"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.2"
+        android:maxLines="2"
+        android:text="上海沪昆高速一槽罐车"
+        android:textColor="@color/text_color_normal"
+        android:textSize="17sp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_one"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@mipmap/detail_backgroud"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/img_two"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@mipmap/detail_backgroud"
+            android:scaleType="fitXY"/>
+
+        <RelativeLayout
+            android:id="@+id/layout_img_three"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:background="@drawable/imageview_frame_shape_day"
+            android:scaleType="fitXY">
+
+            <ImageView
+                android:id="@+id/img_three"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/detail_backgroud"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/tv_image_news_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="4dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="2dp"
+                android:text=""
+                android:textColor="@color/color_white"
+                android:textSize="10sp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/iv_ad_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/img_three"
+                android:layout_alignRight="@+id/img_three"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- 距离顶部间距实际为8dp,离底部间距实际为10dp;为了扩大关闭按钮点击范围,缩小了4dp间距 -->
+
+    <LinearLayout
+        android:id="@+id/layout_bottom_info_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="3px"
+            android:text="46分钟前"
+            android:textColor="@color/text_color_light"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxWidth="120.0dp"
+            android:paddingTop="3px"
+            android:singleLine="true"
+            android:text="腾讯网"
+            android:textColor="@color/text_color_light"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_new_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:paddingTop="3px"
+            android:textColor="@color/text_color_light"
+            android:textSize="10sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:ellipsize="end"
+            android:paddingTop="3px"
+            android:singleLine="true"
+            android:text="75评"
+            android:textColor="@color/text_color_light"
+            android:textSize="10sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_read"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:paddingTop="3px"
+            android:singleLine="true"
+            android:text="100阅读"
+            android:textColor="@color/text_color_light"
+            android:textSize="10sp"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="4dp"
+            android:src="@mipmap/news_close_day"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/line_color"/>
+
+</LinearLayout>
