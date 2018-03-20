@@ -24,6 +24,7 @@ class SplashActivity : BaseActivity() {
 
     private fun skipMain() {
         startActivity(MainActivity::class.java)
+        finish()
     }
 
     override fun onDestroy() {

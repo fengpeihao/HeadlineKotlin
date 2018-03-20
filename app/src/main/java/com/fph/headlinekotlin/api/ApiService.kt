@@ -89,4 +89,7 @@ interface ApiService {
                    @Field("baseVersionName") baseVersionName: String,
                    @Field("clientType") clientType: String,
                    @Field("patchVersion") patchVersion: String): Flowable<Patch>
+
+    @GET
+    fun getHtmlContent(@Url url: String): Flowable<String>
 }

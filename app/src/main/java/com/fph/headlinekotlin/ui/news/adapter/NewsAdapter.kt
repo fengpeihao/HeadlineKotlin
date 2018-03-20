@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.feilu.kotlindemo.api.Constant
 import com.fph.headlinekotlin.R
+import com.fph.headlinekotlin.api.ApiModule
 import com.fph.headlinekotlin.ui.main.activity.WebViewActivity
 import com.fph.headlinekotlin.ui.news.bean.NewsListBean
 import com.fph.headlinekotlin.utils.TimeUtils
@@ -68,6 +69,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
                 val tag = view.getTag() as Int
                 val intent = Intent(mContext,WebViewActivity::class.java)
                 val bundle = Bundle()
+                ApiModule.provideApiService().getHtmlContent(mList.get(tag).shareurl!!)
                 bundle.putString(Constant.webUrl,mList.get(tag).shareurl)
                 intent.putExtras(bundle)
                 mContext?.startActivity(intent)
