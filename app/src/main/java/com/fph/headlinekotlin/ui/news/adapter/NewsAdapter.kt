@@ -1,6 +1,8 @@
 package com.fph.headlinekotlin.ui.news.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
@@ -10,7 +12,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.feilu.kotlindemo.api.Constant
 import com.fph.headlinekotlin.R
+import com.fph.headlinekotlin.ui.main.activity.WebViewActivity
 import com.fph.headlinekotlin.ui.news.bean.NewsListBean
 import com.fph.headlinekotlin.utils.TimeUtils
 
@@ -58,9 +62,15 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
                 Glide.with(mContext).load(item.miniimg!![2].src).into(holder.getView<ImageView>(R.id.img_three))
             }
         }
+        holder.itemView.setTag(position)
         holder.itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(p0: View?) {
-
+            override fun onClick(view: View) {
+                val tag = view.getTag() as Int
+                val intent = Intent(mContext,WebViewActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString(Constant.webUrl,mList.get(tag).shareurl)
+                intent.putExtras(bundle)
+                mContext?.startActivity(intent)
             }
         })
     }

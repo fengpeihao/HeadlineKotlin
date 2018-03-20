@@ -74,7 +74,6 @@ class NewsListBean : Serializable {
          * videonews : 0
          */
 
-        var additional: AdditionalBean? = null
         var bigpic: String? = null
         var comment_count: String? = null
         var content: String? = null
@@ -130,8 +129,6 @@ class NewsListBean : Serializable {
         var kwds: List<*>? = null
         var lbimg: List<LbimgBean>? = null
         var miniimg: List<MiniimgBean>? = null
-
-        class AdditionalBean
 
         class LbimgBean : Serializable {
             /**

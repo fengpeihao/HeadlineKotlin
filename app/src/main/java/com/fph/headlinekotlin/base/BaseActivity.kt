@@ -49,7 +49,10 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     fun showLoading() {
-        loadingDialog?.showDialog() ?: LoadingDialog.Builder(this).build().showDialog()
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog.Builder(this).build()
+        }
+        loadingDialog!!.showDialog()
     }
 
     fun cancelLoading() {
