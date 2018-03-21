@@ -7,7 +7,7 @@ import io.reactivex.subscribers.ResourceSubscriber
 /**
  * Created by fengpeihao on 2017/11/11.
  */
-abstract class Common2Subscriber<T > : ResourceSubscriber<T> {
+abstract class Common2Subscriber<T> : ResourceSubscriber<T> {
 
     private var isShowLoading = true
     private var isCancelLoading = true
@@ -38,7 +38,7 @@ abstract class Common2Subscriber<T > : ResourceSubscriber<T> {
     }
 
     override fun onNext(t: T) {
-        if (isCancelLoading){
+        if (isCancelLoading) {
             AndroidUtils.cancelLoading()
         }
         getData(t)

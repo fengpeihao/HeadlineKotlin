@@ -40,13 +40,37 @@ object ApiModule {
         return Retrofit.Builder()
                 .baseUrl(Base_Host)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+    }
+
+    private fun creatHtmlRetrofit(): Retrofit {
+        loseAgreement();
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(RequestInterceptor())
+                .retryOnConnectionFailure(true)
+                .sslSocketFactory(mSslContext!!.getSocketFactory())
+                .hostnameVerifier(object : HostnameVerifier {
+                    override fun verify(p0: String?, p1: SSLSession?): Boolean {
+                        return true
+                    }
+                })
+                .connectTimeout(10L, SECONDS)
+                .build()
+        return Retrofit.Builder()
+                .baseUrl(Base_Host)
+                .client(client)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ToStringConverterFactory())
                 .build()
     }
 
     //忽略所有https证书
-    private fun loseAgreement(){
+    private fun loseAgreement() {
         val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
             @Throws(CertificateException::class)
             override fun checkClientTrusted(
@@ -75,5 +99,9 @@ object ApiModule {
 
     fun provideApiService(): ApiService {
         return creatRetrofit().create(ApiService::class.java)
+    }
+
+    fun provideHtmlApiService(): ApiService {
+        return creatHtmlRetrofit().create(ApiService::class.java)
     }
 }

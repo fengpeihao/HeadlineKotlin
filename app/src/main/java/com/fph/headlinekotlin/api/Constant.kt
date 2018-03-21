@@ -19,6 +19,7 @@ object Constant {
     val deviceId = "device_id"
     val defaultIndex = "default_index"
     val CLOUD_KEY = "cloud_key"
+    val MODE_NIGHT = -1;
 
     val CLOUDKEYURL_KEY = "http://tjv1.dftoutiao.com/getkey/key"
     val NEWS_LIST = "https://refreshnews.dftoutiao.com/toutiao_appnew02/newspool"

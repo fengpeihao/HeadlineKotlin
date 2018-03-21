@@ -65,7 +65,7 @@ object AndroidUtils {
             val appInfo = App.context.getPackageManager()
                     .getApplicationInfo(App.context.getPackageName(),
                             PackageManager.GET_META_DATA)
-            appType = appInfo.metaData.get("UMENG_CHANNEL").toString()
+            appType = appInfo.metaData.get("UMENG_CHANNEL")?.toString()?:"0"
         } catch (e1: Exception) {
             e1.printStackTrace()
         }
