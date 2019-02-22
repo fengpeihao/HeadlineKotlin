@@ -9,4 +9,6 @@
     <color name="theme_color">#FC940A</color>
     <color name="line_color">#EEEEEE</color>
     <color name="color_e8e8e8">#e8e8e8</color>
+    <color name="color_CCCCCC">#CCCCCC</color>
+    <color name="color_f8f8f8">#f8f8f8</color>
 </resources>

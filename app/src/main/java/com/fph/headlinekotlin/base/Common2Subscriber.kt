@@ -15,16 +15,16 @@ abstract class Common2Subscriber<T> : ResourceSubscriber<T> {
 
     constructor() : super()
 
-    constructor(context: Context) : super() {
+    constructor(context: Context?) : super() {
         mContext = context
     }
 
-    constructor(context: Context, isShowLoading: Boolean) {
+    constructor(context: Context?, isShowLoading: Boolean) {
         mContext = context
         this.isShowLoading = isShowLoading;
     }
 
-    constructor(context: Context, isShowLoading: Boolean, isCancelLoading: Boolean) {
+    constructor(context: Context?, isShowLoading: Boolean, isCancelLoading: Boolean) {
         mContext = context
         this.isShowLoading = isShowLoading;
         this.isCancelLoading = isCancelLoading

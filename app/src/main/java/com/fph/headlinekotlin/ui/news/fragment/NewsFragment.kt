@@ -40,9 +40,6 @@ class NewsFragment : LazyFragment(), NewsContract.View {
     private val idx = 0;
     private var refreshIdx = 0
     private var loadMoreIdx = 0
-    private val NORMAL = 0;
-    private val LOAD_MORE = 1;
-    private val REFRESH = -1;
 
     private val mPresenter = NewsPresenter(this)
 
@@ -51,9 +48,7 @@ class NewsFragment : LazyFragment(), NewsContract.View {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        type = arguments.getString("type", "toutiao")
-        recycler_view.layoutManager = mLayoutManager
-        recycler_view.adapter = mAdapter
+
         if (savedInstanceState != null) {
             refreshPgnum = savedInstanceState.getInt("refreshPgnum", refreshPgnum)
             loadMorePgnum = savedInstanceState.getInt("loadMorePgnum", loadMorePgnum)
@@ -61,19 +56,24 @@ class NewsFragment : LazyFragment(), NewsContract.View {
             loadMoreIdx = savedInstanceState.getInt("loadMoreIdx", loadMoreIdx)
             isFirstShow = savedInstanceState.getBoolean("isFirstShow", isFirstShow)
             mList = savedInstanceState.getSerializable("mList") as ArrayList<NewsListBean.DataBean>
-            mAdapter.setList(mList, NORMAL)
         }
+
+        mAdapter.setList(mList, NewsAdapter.INIT)
+        type = arguments?.getString("type", "toutiao")?:"toutiao"
+        recycler_view.layoutManager = mLayoutManager
+        recycler_view.adapter = mAdapter
 
         ptr_frame.setPtrHandler(object : PtrDefaultHandler() {
             override fun onRefreshBegin(frame: PtrFrameLayout) {
-                mPresenter.getNewsList(newsListBean?.stat, newsListBean?.endkey, refreshPgnum, refreshIdx, type, "上海", REFRESH)
+//                showLoading()
+                mPresenter.getNewsList(newsListBean?.stat, newsListBean?.endkey, refreshPgnum, refreshIdx, type, "上海", NewsAdapter.REFRESH)
                 refreshPgnum--
             }
         })
 
         recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 //获取最后一个完全显示的ItemPosition
                 val lastVisibleItem = mLayoutManager.findLastCompletelyVisibleItemPosition()
@@ -81,23 +81,25 @@ class NewsFragment : LazyFragment(), NewsContract.View {
                 if (totalItemCount > 0 && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem == totalItemCount - 1 && !isLoading && !isLoadAll) {
                     isLoading = true
                     loadMorePgnum++
-                    mPresenter.getNewsList(newsListBean?.stat, newsListBean?.endkey, loadMorePgnum, loadMoreIdx, type, "上海", LOAD_MORE)
+//                    showLoading()
+                    mPresenter.getNewsList(newsListBean?.stat, newsListBean?.endkey, loadMorePgnum, loadMoreIdx, type, "上海", NewsAdapter.LOAD_MORE)
                 }
             }
         })
     }
 
     override fun lazyInit() {
-        mPresenter.getNewsList(newsListBean?.stat, newsListBean?.endkey, pgnum, idx, type, "上海", NORMAL)
+//        showLoading()
+        mPresenter.getNewsList(newsListBean?.stat, newsListBean?.endkey, pgnum, idx, type, "上海", NewsAdapter.NORMAL)
     }
 
     override fun getNewsList(newsListBean: NewsListBean, loadType: Int) {
         this.newsListBean = newsListBean
-        if (loadType == REFRESH) {
+        if (loadType == NewsAdapter.REFRESH) {
             refreshIdx -= newsListBean.data?.size ?: 0
             mList.addAll(0, newsListBean.data!!)
             ptr_frame.refreshComplete()
-        } else if (loadType == LOAD_MORE) {
+        } else if (loadType == NewsAdapter.LOAD_MORE) {
             if (newsListBean.data?.size ?: 0 == 0) {
                 isLoadAll = true
             }

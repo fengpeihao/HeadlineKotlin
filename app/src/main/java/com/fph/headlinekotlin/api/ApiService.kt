@@ -6,6 +6,7 @@ import com.fph.headlinekotlin.ui.main.bean.Patch
 import com.fph.headlinekotlin.ui.news.bean.NewsListBean
 import com.fph.headlinekotlin.ui.usercenter.bean.CheckRegistBean
 import com.fph.headlinekotlin.ui.usercenter.bean.UserInfoBean
+import com.fph.headlinekotlin.ui.video.bean.VideoListBean
 import io.reactivex.Flowable
 import retrofit2.http.*
 
@@ -95,4 +96,33 @@ interface ApiService {
      */
     @GET
     fun getHtmlContent(@Url url: String): Flowable<String>
+
+    /**
+     * 获取视频分类列表
+     */
+    @FormUrlEncoded
+    @POST
+    fun getVideoChannel(@Url url: String,
+                   @Field("ime") ime: String,
+                   @Field("appqid") appqid: String,
+                   @Field("apptypeid") apptypeid: String,
+                   @Field("ver") ver: String,
+                   @Field("os") os: String,
+                   @Field("ttaccid") ttaccid: String,
+                   @Field("AndroidId") AndroidId: String): Flowable<ArrayList<ChannelBean>>
+
+    /**
+     * 获取视频列表
+     */
+    @FormUrlEncoded
+    @POST
+    fun getVideoList(@Url url: String,
+                    @Field("newkey") newkey: String,
+                    @Field("startkey") startkey: String,
+                    @Field("categoryId") categoryId: String,
+                    @Field("count") count: Int,
+                    @Field("pgnum") pgnum: Int,
+                    @Field("iswifi") iswifi: String,
+                    @Field("position") position: String,
+                    @Field("param") param: String): Flowable<VideoListBean>
 }

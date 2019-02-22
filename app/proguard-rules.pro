@@ -52,7 +52,6 @@
 }
 
 -keep public class * extends android.support.v4.**
--keep public class * extends android.app.Fragment
 -keep class android.support.v4.view.**{ *;}
 -keep class android.support.v4.content.**{ *;}
 
@@ -137,3 +136,27 @@ public <fields>;
 public <methods>;
 }
 #retrofit2  -- end
+
+#ijkplayer  -- start
+-keep class tv.danmaku.ijk.media.player.** {*; }
+-keepclasseswithmembernames class tv.danmaku.ijk.media.player.IjkMediaPlayer{
+public <fields>;
+public <methods>;
+}
+-keepclasseswithmembernames class tv.danmaku.ijk.media.player.ffmpeg.FFmpegApi{
+public <fields>;
+public <methods>;
+}
+#ijkplayer  -- end
+
+#-----greenDao start---
+-keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
+public static java.lang.String TABLENAME;
+}
+-keep class **$Properties
+
+# If you do not use SQLCipher:
+-dontwarn org.greenrobot.greendao.database.**
+# If you do not use Rx:
+-dontwarn rx.**
+#----greenDao end----

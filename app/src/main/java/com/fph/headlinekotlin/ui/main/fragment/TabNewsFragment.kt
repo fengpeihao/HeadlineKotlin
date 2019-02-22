@@ -1,8 +1,8 @@
 package com.fph.headlinekotlin.ui.main.fragment
 
 import android.os.Bundle
-import com.feilu.kotlindemo.base.BaseFragment
 import com.fph.headlinekotlin.R
+import com.fph.headlinekotlin.base.LazyFragment
 import com.fph.headlinekotlin.ui.main.adapter.NewsNavigatorAdapter
 import com.fph.headlinekotlin.ui.main.adapter.TabNewsAdapter
 import com.fph.headlinekotlin.ui.main.bean.ChannelBean
@@ -16,21 +16,24 @@ import kotlinx.android.synthetic.main.fragment_tab_news.*
 /**
  * Created by fengpeihao on 2018/1/10.
  */
-class TabNewsFragment : BaseFragment(), TabNewsContract.View {
+class TabNewsFragment : LazyFragment(), TabNewsContract.View {
 
     private val mPresenter = TabNewsPresenter(this)
     private val mTitles = ArrayList<ChannelBean>()
-    private var mAdapter : TabNewsAdapter?=null
+    private var mAdapter: TabNewsAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_tab_news
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun lazyInit() {
         mPresenter.getTitles()
+    }
+
+    override fun init(savedInstanceState: Bundle?) {
         magic_indicator.navigator = getCommonNavigator()
         ViewPagerHelper.bind(magic_indicator, view_pager)
-        mAdapter = TabNewsAdapter(fragmentManager, mTitles)
+        mAdapter = TabNewsAdapter(childFragmentManager, mTitles)
         view_pager.adapter = mAdapter
     }
 
@@ -43,7 +46,7 @@ class TabNewsFragment : BaseFragment(), TabNewsContract.View {
     }
 
     override fun getTitles(titles: ArrayList<ChannelBean>) {
-        mTitles.clear();
+        mTitles.clear()
         mTitles.addAll(titles)
         mAdapter?.notifyDataSetChanged()
         magic_indicator.navigator.notifyDataSetChanged()

@@ -23,5 +23,6 @@ object Constant {
 
     val CLOUDKEYURL_KEY = "http://tjv1.dftoutiao.com/getkey/key"
     val NEWS_LIST = "https://refreshnews.dftoutiao.com/toutiao_appnew02/newspool"
+    val VIDEO_LIST = "https://video.dftoutiao.com/app_video/getvideos"
 
 }

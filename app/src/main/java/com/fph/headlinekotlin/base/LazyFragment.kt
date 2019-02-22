@@ -13,7 +13,7 @@ abstract class LazyFragment : BaseFragment() {
     protected var isVisibleToUser = false
     protected var isFirstShow = true
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isFragmentCreated = true
         if (isVisibleToUser && isFirstShow) {
@@ -29,6 +29,14 @@ abstract class LazyFragment : BaseFragment() {
             lazyInit()
         }
         super.setUserVisibleHint(isVisibleToUser)
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden && isFragmentCreated && isFirstShow) {
+            isFirstShow = false
+            lazyInit()
+        }
     }
 
     abstract fun lazyInit()

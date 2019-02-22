@@ -17,14 +17,14 @@ abstract class BaseFragment : RxFragment() {
     protected var rootView: View? = null
     private var loadingDialog: LoadingDialog? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        rootView = inflater!!.inflate(getLayoutId(), null)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (rootView == null)
+            rootView = inflater.inflate(getLayoutId(), null)
 
         return rootView
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(savedInstanceState)
     }
@@ -60,7 +60,7 @@ abstract class BaseFragment : RxFragment() {
     }
 
     fun showLoading() {
-        loadingDialog?.showDialog()?:LoadingDialog.Builder(context).build().showDialog()
+        loadingDialog?.showDialog() ?: LoadingDialog.Builder(context).build().showDialog()
     }
 
     fun cancelLoading() {

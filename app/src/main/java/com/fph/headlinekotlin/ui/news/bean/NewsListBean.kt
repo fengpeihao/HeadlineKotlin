@@ -129,6 +129,7 @@ class NewsListBean : Serializable {
         var kwds: List<*>? = null
         var lbimg: List<LbimgBean>? = null
         var miniimg: List<MiniimgBean>? = null
+        var ctrtime: Long = 0
 
         class LbimgBean : Serializable {
             /**

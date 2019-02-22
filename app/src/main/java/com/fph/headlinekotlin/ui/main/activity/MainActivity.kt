@@ -13,7 +13,7 @@ import com.fph.headlinekotlin.ui.main.presenter.MainPresenter
 import com.fph.headlinekotlin.ui.main.widget.BottomTabView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() ,MainContract.View{
+class MainActivity : BaseActivity(), MainContract.View {
 
     private val mFragments = ArrayList<Fragment>()
     private var mCurrentIndex: Int = BottomTabView.NEWS
@@ -40,10 +40,10 @@ class MainActivity : BaseActivity() ,MainContract.View{
     }
 
     private fun initFragment() {
-        val newsFragment = TabNewsFragment() as Fragment
-        val videoFragment = TabVideoFragment() as Fragment
-        val taskFragment = TabTaskFragment() as Fragment
-        val mineFragment = TabMineFragment() as Fragment
+        val newsFragment: Fragment = TabNewsFragment()
+        val videoFragment: Fragment = TabVideoFragment()
+        val taskFragment: Fragment = TabTaskFragment()
+        val mineFragment: Fragment = TabMineFragment()
         mFragments.add(newsFragment)
         mFragments.add(videoFragment)
         mFragments.add(taskFragment)
@@ -57,7 +57,7 @@ class MainActivity : BaseActivity() ,MainContract.View{
                 .hide(videoFragment)
                 .hide(taskFragment)
                 .hide(mineFragment)
-                .commitAllowingStateLoss()
+                .commit()
     }
 
     private fun showFragment(index: Int) {
@@ -69,7 +69,7 @@ class MainActivity : BaseActivity() ,MainContract.View{
                 ft.hide(mFragments[i])
             }
         }
-        ft.commitAllowingStateLoss()
+        ft.commit()
     }
 
     fun loadPatch() {

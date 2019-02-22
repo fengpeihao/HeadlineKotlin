@@ -1,10 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.1.60'
+    ext.kotlin_version = '1.2.51'
     repositories {
         google()
         jcenter()
+        mavenCentral() // add repository
     }
     dependencies {
 //        classpath 'com.android.tools.build:gradle:3.0.1'
@@ -12,12 +13,9 @@ buildscript {
 //        classpath('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.1')
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        if (project.hasProperty('GRADLE_3') && GRADLE_3.equalsIgnoreCase('TRUE')) {
-            classpath 'com.android.tools.build:gradle:3.0.0-rc2'
-        } else {
-            classpath 'com.android.tools.build:gradle:2.3.3'
-        }
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "com.tencent.tinker:tinker-patch-gradle-plugin:${TINKER_VERSION}"
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
 }
 
@@ -28,10 +26,6 @@ allprojects {
         mavenLocal()
         maven { url "https://jitpack.io" }
     }
-}
-
-def is_gradle_3() {
-    return hasProperty('GRADLE_3') && GRADLE_3.equalsIgnoreCase('TRUE')
 }
 
 task clean(type: Delete) {

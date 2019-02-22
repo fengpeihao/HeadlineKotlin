@@ -13,14 +13,14 @@ import kotlinx.android.synthetic.main.layout_bottom.view.*
  */
 class BottomTabView : LinearLayout, View.OnClickListener {
     companion object {
-        public val NEWS: Int = 0;
-        public val VIDEO: Int = 1;
-        public val TASK: Int = 2;
-        public val MINE: Int = 3;
+        val NEWS: Int = 0;
+        val VIDEO: Int = 1;
+        val TASK: Int = 2;
+        val MINE: Int = 3;
     }
 
     private var checkIndex: Int = NEWS
-    public var mListener: OnTabCheckedListener? = null
+    var mListener: OnTabCheckedListener? = null
 
     constructor(context: Context?) : super(context) {
         init()
@@ -47,7 +47,7 @@ class BottomTabView : LinearLayout, View.OnClickListener {
         checkTab(checkIndex)
     }
 
-    public fun setDefaultChcekIndex(defaultCheckIndex: Int) {
+    fun setDefaultChcekIndex(defaultCheckIndex: Int) {
         checkIndex = defaultCheckIndex
         checkTab(checkIndex)
     }

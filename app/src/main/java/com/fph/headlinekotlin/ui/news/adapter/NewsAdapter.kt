@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.feilu.kotlindemo.api.Constant
 import com.fph.headlinekotlin.R
+import com.fph.headlinekotlin.base.BaseViewHolder
 import com.fph.headlinekotlin.ui.main.activity.WebViewActivity
 import com.fph.headlinekotlin.ui.news.bean.NewsListBean
 import com.fph.headlinekotlin.utils.TimeUtils
@@ -24,16 +25,23 @@ import com.fph.headlinekotlin.utils.TimeUtils
  */
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
-    private val NONE = 0;
+    private val NONE = 0
     private val ONE = 1
     private val THREE = 3
-    val NORMAL = 0;
-    val LOAD_MORE = 1;
-    val REFRESH = -1;
+    private val NO_DATA = -1
+    private var type = NORMAL
     private var mContext: Context? = null
     private var mList = ArrayList<NewsListBean.DataBean>()
 
+    companion object {
+        const val INIT = -2
+        const val NORMAL = 0
+        const val LOAD_MORE = 1
+        const val REFRESH = -1
+    }
+
     fun setList(list: List<NewsListBean.DataBean>, loadType: Int) {
+        type = loadType
         if (loadType == REFRESH) {
             mList.addAll(0, list)
         } else if (loadType == LOAD_MORE) {
@@ -45,6 +53,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (getItemViewType(position) == NO_DATA) return
         val item = mList.get(position)
         holder.setText(R.id.tv_title, item.topic ?: "")
         holder.setText(R.id.tv_time, TimeUtils.getNewsTime(item.date ?: ""))
@@ -66,9 +75,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 val tag = view.getTag() as Int
-                val intent = Intent(mContext,WebViewActivity::class.java)
+                val intent = Intent(mContext, WebViewActivity::class.java)
                 val bundle = Bundle()
-                bundle.putString(Constant.webUrl,mList.get(tag).shareurl)
+                bundle.putString(Constant.webUrl, mList.get(tag).shareurl)
                 intent.putExtras(bundle)
                 mContext?.startActivity(intent)
             }
@@ -76,24 +85,35 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
+
+        if (mList.size == 0) {
+            if (type == INIT) return 0
+            return 1
+        }
         return mList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         mContext = parent.context
-        if (viewType == ONE) {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_one_img,parent,false)
+        if (viewType == NO_DATA) {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_no_data, parent, false)
+            return ViewHolder(view)
+        } else if (viewType == ONE) {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_one_img, parent, false)
             return ViewHolder(view)
         } else if (viewType == THREE) {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_three_img,parent,false);
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_three_img, parent, false);
             return ViewHolder(view)
         } else {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_none_img,parent,false);
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news_list_none_img, parent, false);
             return ViewHolder(view)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
+        if (mList.size == 0) {
+            return NO_DATA
+        }
         val miniimg = mList.get(position).miniimg
         if (miniimg?.size ?: 0 >= 3) {
             return THREE
@@ -104,20 +124,5 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
         return NONE
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var views = SparseArray<View>()
-        fun <T : View> getView(@IdRes viewId: Int): T {
-            var view = views.get(viewId)
-            if (view == null) {
-                view = itemView.findViewById<T>(viewId)
-                views.put(viewId, view)
-            }
-            return view as T
-        }
-
-        fun setText(@IdRes viewId: Int, value: CharSequence) {
-            val view = getView<TextView>(viewId)
-            view.setText(value)
-        }
-    }
+    class ViewHolder(itemView: View) : BaseViewHolder(itemView)
 }

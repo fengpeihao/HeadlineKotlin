@@ -17,10 +17,12 @@ class NewsPresenter : NewsContract.Presenter {
     override fun getNewsList(startKey: String?, newKey: String?, pgnum: Int, idx: Int, type: String, position: String, loadType: Int) {
         mModel.getNewsList(startKey, newKey, pgnum, idx, type, position, object : Common2Subscriber<NewsListBean>() {
             override fun netError(message: String) {
+//                mView.cancelLoading()
                 mView.showToast(message)
             }
 
             override fun getData(t: NewsListBean) {
+//                mView.cancelLoading()
                 mView.getNewsList(t, loadType)
             }
         })

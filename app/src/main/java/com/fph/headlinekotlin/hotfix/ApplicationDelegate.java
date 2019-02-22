@@ -12,9 +12,9 @@ import com.fph.headlinekotlin.hotfix.log.MyLogImp;
 import com.fph.headlinekotlin.hotfix.utils.ApplicationContext;
 import com.fph.headlinekotlin.hotfix.utils.TinkerManager;
 import com.fph.headlinekotlin.utils.AndroidUtils;
+import com.tencent.tinker.entry.DefaultApplicationLike;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
-import com.tencent.tinker.loader.app.DefaultApplicationLike;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -27,8 +27,6 @@ public class ApplicationDelegate extends DefaultApplicationLike {
 
     private static final String TAG = "Tinker.ApplicationDelegate";
     private static ApplicationDelegate sInstance;
-
-//    private Set<Activity> allActivities;
 
     public ApplicationDelegate(Application application, int tinkerFlags, boolean tinkerLoadVerifyFlag,
                                long applicationStartElapsedTime, long applicationStartMillisTime, Intent tinkerResultIntent) {
@@ -79,12 +77,6 @@ public class ApplicationDelegate extends DefaultApplicationLike {
 //        Bugly.init(getApplication(), "8b964ad433", false);
 
 //        UMShareAPI.get(getApplication());
-
-        //Config.DEBUG = true;
-
-
-//        CrashHandler crashHandler = CrashHandler.getInstance();
-//        crashHandler.init(getApplicationContext());
         //初始化sdk
         JPushInterface.setDebugMode(BuildConfig.DEBUG);//正式版的时候设置false，关闭调试
         JPushInterface.init(getApplication());

@@ -26,6 +26,7 @@ class WebViewActivity : BaseActivity() , WebViewContract.View{
         url = extras.getString(Constant.webUrl,"http://www.baidu.com")
         initWebView()
 //        mPresenter.getHtmlContent(url!!)
+        web_view.loadUrl(url)
     }
 
     private fun initWebView() {

@@ -10,13 +10,9 @@ import com.fph.headlinekotlin.ui.news.fragment.NewsFragment
 /**
  * Created by fengpeihao on 2018/1/12.
  */
-class TabNewsAdapter : FragmentStatePagerAdapter {
+class TabNewsAdapter(fm: FragmentManager?, titles: ArrayList<ChannelBean>) : FragmentStatePagerAdapter(fm) {
 
-    private var mTitles: ArrayList<ChannelBean>? = null
-
-    constructor(fm: FragmentManager, titles: ArrayList<ChannelBean>) : super(fm) {
-        mTitles = titles
-    }
+    private var mTitles: ArrayList<ChannelBean>? = titles
 
     override fun getItem(position: Int): Fragment {
         val newsFragment = NewsFragment()

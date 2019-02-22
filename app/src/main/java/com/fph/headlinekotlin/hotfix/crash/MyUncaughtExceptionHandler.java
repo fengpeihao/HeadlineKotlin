@@ -23,9 +23,9 @@ import android.os.SystemClock;
 import com.fph.headlinekotlin.hotfix.reporter.TinkerReport;
 import com.fph.headlinekotlin.hotfix.utils.TinkerManager;
 import com.fph.headlinekotlin.hotfix.utils.Utils;
+import com.tencent.tinker.entry.ApplicationLike;
 import com.tencent.tinker.lib.tinker.TinkerApplicationHelper;
 import com.tencent.tinker.lib.util.TinkerLog;
-import com.tencent.tinker.loader.app.ApplicationLike;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
 
