@@ -1,20 +1,24 @@
 package com.fph.headlinekotlin.utils
 
+import android.content.Context
 import android.text.TextUtils
 import com.fph.headlinekotlin.base.App
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.io.File
 
 /**
  * Created by fengpeihao on 2018/3/20.
  */
 object NewsHtmlUtils {
-    fun getHtmlContent(oldContent: String): String {
+    private val newDocument = Jsoup.parse(getTemplate("page.tmpl"))
+
+    fun getHtmlContent(context: Context, oldContent: String): String {
         val oldDocument = Jsoup.parse(oldContent)
         val title = getContentTitle(oldDocument)
         val htmlContent = getHtmlContent(oldDocument)
         val htmlSrc = getHtmlSrc(oldDocument)
-        val newDocument = Jsoup.parse(getTemplate("page.tmpl"))
+
         val linkElements = newDocument.getElementsByTag("link")
         val linkStyle = linkElements[0]
         val path = "file:///android_asset/static_day.css"
@@ -24,7 +28,17 @@ object NewsHtmlUtils {
         val sourcelinkElements = oldDocument.getElementsByTag("link")
         for (linkElement in sourcelinkElements) {
             val href = linkElement.attr("href")
-            linkStyle.before(href)
+            val fileName = getCssFileNameFromUrl(href)
+            var path = ""
+            path = FileUtils.getCachePath(context, fileName)
+
+            val file = File(path)
+            var cssUrl = href
+            if (file.exists() && file.length() > 10) {
+                cssUrl = "file://$path"
+            }
+            val linkHtml = createLinkOnUri(cssUrl)
+            linkStyle.before(linkHtml)
         }
 
         newDocument.select("title").html(title)
@@ -92,7 +106,7 @@ object NewsHtmlUtils {
      * @param url
      * @return
      */
-    fun getCssFileNameFromUrl(url: String): String? {
+    private fun getCssFileNameFromUrl(url: String): String {
         if (TextUtils.isEmpty(url)) {
             return url
         }

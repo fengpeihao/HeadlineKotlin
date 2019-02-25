@@ -18,6 +18,7 @@ import java.io.File
 import java.lang.ref.WeakReference
 import java.util.*
 
+
 /**
  * Created by fengpeihao on 2018/2/24.
  */

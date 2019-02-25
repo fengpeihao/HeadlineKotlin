@@ -2,6 +2,7 @@ package com.feilu.kotlindemo.api
 
 import com.fph.headlinekotlin.base.BaseEntity
 import com.fph.headlinekotlin.ui.main.bean.ChannelBean
+import com.fph.headlinekotlin.ui.main.bean.CssListBean
 import com.fph.headlinekotlin.ui.main.bean.Patch
 import com.fph.headlinekotlin.ui.news.bean.NewsListBean
 import com.fph.headlinekotlin.ui.usercenter.bean.CheckRegistBean
@@ -125,4 +126,14 @@ interface ApiService {
                     @Field("iswifi") iswifi: String,
                     @Field("position") position: String,
                     @Field("param") param: String): Flowable<VideoListBean>
+
+    /**
+     * 获取通用css列表
+     */
+    @FormUrlEncoded
+    @POST
+    fun getCssList(
+            @Url url: String,
+            @Field("param") param: String
+    ): Flowable<CssListBean>
 }

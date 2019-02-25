@@ -14,11 +14,9 @@ interface MainContract {
 
     }
 
-    interface Model : BaseModel{
-
+    interface Model : BaseModel {
     }
 
-    abstract class Presenter : BasePresenter<MainActivity, MainModel>(){
-
+    abstract class Presenter : BasePresenter<MainActivity, MainModel>() {
     }
 }

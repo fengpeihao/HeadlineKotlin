@@ -71,13 +71,13 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
                 Glide.with(mContext).load(item.miniimg!![2].src).into(holder.getView<ImageView>(R.id.img_three))
             }
         }
-        holder.itemView.setTag(position)
+        holder.itemView.tag = position
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
-                val tag = view.getTag() as Int
+                val tag = view.tag as Int
                 val intent = Intent(mContext, WebViewActivity::class.java)
                 val bundle = Bundle()
-                bundle.putString(Constant.webUrl, mList.get(tag).shareurl)
+                bundle.putString(Constant.webUrl, mList[tag].url)
                 intent.putExtras(bundle)
                 mContext?.startActivity(intent)
             }

@@ -2,10 +2,10 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta charset="utf-8">
-    <title>创新3D闪存技术 首届SSD技术峰会开幕</title>
-    <meta name="keywords" content="东方头条,头条新闻,头条,今日新闻头条,头条网,头条新闻,今日头条新闻"/>
+    <title></title>
+    <meta name="keywords" content=""/>
     <meta name="description"
-          content="东方头条网 东方网 旗下《东方头条》是一款会自动学习的资讯软件,它会分析你的兴趣爱好,为你推荐喜欢的内容,并且越用越懂你.就要你好看,东方头条新闻网!"/>
+          content=""/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1"/>
     <meta http-equiv="Cache-Control" content="no-cache"/>
@@ -13,38 +13,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <link rel="stylesheet"
-          href="file:///storage/emulated/0/Android/data/com.songheng.eastnews/files/res/static_day.css">
+          href="file:///android_asset/static_day.css">
     </link>
 
 
 </head>
 
-<script language="javascript">
-
-   function replace(position) {
-      var images = document.getElementsByTagName('img');
-      var image = images[position];
-      image.src = image.getAttribute('original_src');
-   }
-
-   function updateNightView(position,url) {
-       var images = document.getElementsByTagName('img');
-       var image = images[position];
-       image.src = url;
-    }
-
-   function checkAndReloadImg(position) {
-      var images = document.getElementsByTagName('img');
-      var image = images[position];
-      var img = new Image();
-      img.src = image.src;
-      if(!img.complete){
-         image.src = image.src + '?'+Math.random() ;
-      }
-   }
-
-
-</script>
 
 
 <body>
@@ -57,68 +31,5 @@
 
 </div>
 </body>
-<script>
-  var div0 = document.createElement("div");
-  var div2 = document.createElement("div");
-  var div1 = document.createElement("div");
-  var img1 = document.createElement('img');
-  var spread = document.getElementById('content');
-  var body1 = document.querySelector('body');
-  var a = spread.offsetHeight;
-  if(a<1152){
-    div1.style.display = 'none';
-    div2.style.display = 'none';
-    div0.style.display = 'none';
-  }else {
-    spread.style.height = '1152px';
-    spread.style.overflow = 'hidden';
-  }
-  div1.innerHTML='展开全文';
-  body1.appendChild(div0);
-  div0.appendChild(div2);
-  div0.appendChild(div1);
-  img1.src ="http://himage.xnheadline.com/android/png/logo1.png";
-  div1.appendChild(img1);
-  div0.style.position = 'relative';
-  div2.style.width = '100%';
-  div2.style.height = '90px';
-  div2.style.position = 'absolute';
-  div2.style.top = '-98px';
-  div2.style.backgroundImage = 'linear-gradient(-181deg,hsla(0,0%,100%,0),#ffffff)';
-  div1.style.width = '25%';
-  div1.style.height = '26px';
-  div1.style.lineHeight = '26px';
-  div1.style.marginLeft = '40%';
-  div1.style.marginTop = '10px';
-  div1.style.marginBottom = '5px';
-  div1.style.borderRadius = '5px';
-  div1.style.textAlign = 'center';
-  div1.style.color = '#FC940A';
-  img1.style.marginBottom = '2px';
-  img1.style.display = 'inline-block';
-  img1.style.width = '12px';
-  img1.style.marginLeft = '5px';
-  var iSpread = false;
-  var height = spread.scrollHeight;
-  var time = 10;
-  var interval = 2;
-  var speed = height/(time/interval);
-  div1.onclick = function (e) {
-    div1.disabled = 'disabled';
-    if(!iSpread){
-      var speeds = 0;
-      window.sharePage.webViewApp();
-      var timer = setInterval(function () {
-        speeds += speed;
-        spread.style.height = speeds + 'px';
-        if(parseInt(spread.style.height) >=height){
-          clearTimeout(timer);
-          div1.disabled = '';
-        }
-      },interval)
-      div1.style.display = 'none';
-      div2.style.display = 'none';
-    }
-  }
-</script>
+
 </html>

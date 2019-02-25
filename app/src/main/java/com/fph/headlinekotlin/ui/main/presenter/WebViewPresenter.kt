@@ -21,7 +21,7 @@ class WebViewPresenter : WebViewContract.Presenter {
             }
 
             override fun getData(t: String) {
-                val htmlContent = NewsHtmlUtils.getHtmlContent(t)
+                val htmlContent = NewsHtmlUtils.getHtmlContent(mView, t)
                 mView.getHtmlContentSuccess(htmlContent)
             }
         })
